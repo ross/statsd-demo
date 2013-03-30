@@ -1,6 +1,6 @@
 # Django settings for www project.
 
-from os.path import dirname
+from os.path import dirname, join
 
 ROOT = dirname(dirname(__file__))
 
@@ -16,6 +16,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'sqlite3.db',
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake'
     }
 }
 
@@ -38,6 +45,7 @@ STATICFILES_FINDERS = (
 )
 
 SECRET_KEY = 'mzvqg6$5mhu4aw&=hd@g%$i#vh19uqm9@y$%0no&snz#o#pb($'
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -47,7 +55,7 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django_statsd.middleware.GraphiteRequestTimingMiddleware',
-    'django_statsd.middleware.GraphiteMiddleware'
+    'django_statsd.middleware.GraphiteMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -75,8 +83,10 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.admin',
     'django_statsd',
     'debug_toolbar',
+    'app',
 )
 
 DEBUG_TOOLBAR_CONFIG = {

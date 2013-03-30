@@ -1,0 +1,17 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+{{ block.super }}
+<table>
+    <tr>
+        <th>Email</th>
+        <th>Name</th>
+    </tr>
+    {% for employee in employees %}
+    <tr>
+        <td>{{ employee.email }}</td>
+        <td>{{ employee.name }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

@@ -1,0 +1,6 @@
+Django
+django-debug-toolbar
+django-statsd-mozilla
+futures
+requests
+requests-futures
